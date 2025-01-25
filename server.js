@@ -14,7 +14,16 @@ app.use(express.json());
 let partners = [];
 
 // ✅ Load the Excel file at server startup
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+
+// Fix __dirname for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+// Correct file path
 const excelFilePath = path.join(__dirname, "Partners List.xlsx");
+
 
 try {
     const workbook = xlsx.readFile(excelFilePath);
